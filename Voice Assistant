@@ -1,0 +1,46 @@
+import datetime
+import webbrowser
+import random
+
+def greetings():
+    options = ["Hello there! How can I help?", "Greetings! What's on your mind?", "Hi! What would you like to do?"]
+    return random.choice(options)
+
+def fetch_time():
+    current_time = datetime.datetime.now().strftime("%H:%M:%S")
+    return f"It's currently {current_time}."
+
+def fetch_date():
+    current_date = datetime.datetime.now().strftime("%Y-%m-%d")
+    return f"The date today is {current_date}."
+
+def explore_online(query):
+    search_link = f"https://www.google.com/search?q={query}"
+    webbrowser.open(search_link)
+    return f"Here are some results related to {query}."
+
+def initiate_assistant():
+    print("Starting the assistant...")
+    print(greetings())
+    
+    while True:
+        user_query = input("You: ").lower()
+        
+        if "hello" in user_query:
+            print(greetings())
+        elif "time" in user_query:
+            print(fetch_time())
+        elif "date" in user_query:
+            print(fetch_date())
+        elif "search" in user_query:
+            keyword = user_query.replace("search", "").strip()
+            print(explore_online(keyword))
+        elif "exit" in user_query:
+            print("Take care!")
+            break
+        else:
+            print("I'm not sure what you mean. Please clarify.")
+
+if __name__ == "__main__":
+    initiate_assistant()
+
