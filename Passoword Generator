@@ -1,0 +1,39 @@
+import string
+
+def craft_password(length, with_letters=True, with_numbers=True, with_symbols=True):
+    """Formulate a password based on user specifications."""
+    charset = ''
+    
+    if with_letters:
+        charset += string.ascii_letters
+    if with_numbers:
+        charset += string.digits
+    if with_symbols:
+        charset += string.punctuation
+    
+    if not charset:
+        print("Kindly select at least one character set.")
+        return None
+    
+    return ''.join(random.choice(charset) for _ in range(length))
+
+def initiate_generator():
+    print("Welcome to the Password Crafting Tool!")
+    
+    # Gather user preferences for password creation
+    password_length = int(input("Specify the desired length of the password: "))
+    include_letters = input("Should the password have letters? (yes/no): ").lower() in ['yes', 'y']
+    include_numbers = input("Should the password have numbers? (yes/no): ").lower() in ['yes', 'y']
+    include_symbols = input("Should the password have symbols? (yes/no): ").lower() in ['yes', 'y']
+
+    # Generate the password based on user inputs
+    generated_password = craft_password(password_length, include_letters, include_numbers, include_symbols)
+    
+    # Display the generated password if successful
+    if generated_password:
+        print(f"\nYour Created Password: {generated_password}")
+    else:
+        print("Creation of the password failed. Please adjust your preferences.")
+
+if __name__ == "__main__":
+    initiate_generator()
